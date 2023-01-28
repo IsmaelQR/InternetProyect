@@ -23,8 +23,7 @@ salon_schema = SalonSchema(many=True)
 
 @app.route('/') #ruta raiz
 def index():
-    nuevo_salon= Salon.query.all()
-    return render_template('index.html', contacts=nuevo_salon)
+    return 'holamundo'
  
     
 @app.route('/salones',methods=['POST']) #ruta raiz

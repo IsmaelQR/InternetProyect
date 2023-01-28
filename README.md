@@ -18,7 +18,7 @@ Credenciales .env
     FLASK_APP=main.py
     FLASK_DEBUG=1
     FLASK_ENV=FLASK_DEVELOPMENT
-    SQLALCHEMY_DATABASE_URI= mysql://root@localhost/aula1_crud_flask
+    SQLALCHEMY_DATABASE_URI= mysql://root@localhost/nombredetubd
 ```
 
 
@@ -43,14 +43,19 @@ Metodo GET
 Metodo DELETE
 
 ```bash
-    http://127.0.0.1:5000/ver-salones
+    http://127.0.0.1:5000/salon/2
 
 ```
 
 Metodo UPDATE
 
 ```bash
-    http://127.0.0.1:5000/ver-salones
+    http://127.0.0.1:5000/salon-update/3
+
+{
+  "aula":"mejora",
+  "hora_entrada":"11:00"
+}
 
 ```
 
