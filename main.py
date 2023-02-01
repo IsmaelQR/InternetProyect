@@ -5,12 +5,12 @@ from flask import render_template,redirect,url_for
 from flask import request,jsonify
 from app.db import db
 from app.models.salon import Salon
-from flask_restful import Api, Resource
+#from flask_restful import Api, Resource
 
 app=create_app()
 ma = Marshmallow(app) #Es una extensión que facilita la 
 #serialización de los modelos de la base de datos a JSON y viceversa
-api = Api(app) # new
+#api = Api(app) # new
 
 #Schema de salon
 class SalonSchema(ma.Schema):
@@ -21,13 +21,14 @@ class SalonSchema(ma.Schema):
 salon_schema = SalonSchema() 
 salon_schema = SalonSchema(many=True)
 
-@app.route('/') #ruta raiz
+@app.route('/',) #ruta raiz
 def index():
-    return 'holamundo'
- 
+    return render_template('index.html')
+
+
     
 @app.route('/salones',methods=['POST']) #ruta raiz
-def add_salones(Resource):
+def add_salones():
     aula=request.json['aula']
     hora_entrada=request.json['hora_entrada']
 
@@ -65,6 +66,7 @@ def get_salones():
 #Ver por salon
 @app.route('/ver-salones/<id>', methods=['GET'])
 def get_salones_id(id):
+                        #WHERE
     salon =Salon.query.filter_by(id=id).all()
     if salon:
         return salon_schema.dump(salon), 200
@@ -92,6 +94,25 @@ def update_salon(id):
     db.session.commit()
 
     return {"message": ("Aula Actualizada")}, 200
+
+#
+@app.route('/salon-update-path/<id>', methods=['PATCH'])
+def update_salon_path(id):
+        
+    salon = Salon.query.get(id)
+    aula=request.json['aula']
+    #hora_entrada=request.json['hora_entrada']
+
+
+
+    salon.aula = aula
+    #salon.hora_entrada = hora_entrada
+    db.session.commit()
+
+    return {"message": ("Aula Actualizada")}, 200
+
+
+
 
 
 db.init_app(app)
