@@ -13,6 +13,7 @@ ma = Marshmallow(app) #Es una extensión que facilita la
 #api = Api(app) # new
 
 #Schema de salon
+'''
 class SalonSchema(ma.Schema):
     class Meta:
         fields = ('id', 'aula', 'hora_entrada')
@@ -122,3 +123,4 @@ with app.app_context():
 
 if __name__ == "__main__":
     app.run(debug=True)
+'''
