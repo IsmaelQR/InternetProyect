@@ -12,11 +12,11 @@ ma = Marshmallow(app) #Es una extensión que facilita la
 #serialización de los modelos de la base de datos a JSON y viceversa
 #api = Api(app) # new
 
-#Schema de salon
-'''
-class SalonSchema(ma.Schema):
+#Scema de company
+
+class CompanySchema(ma.Schema):
     class Meta:
-        fields = ('id', 'aula', 'hora_entrada')
+        fields = ('ruc', 'name', 'sunatstate')
         model =Salon
 
 salon_schema = SalonSchema() 
@@ -25,7 +25,7 @@ salon_schema = SalonSchema(many=True)
 @app.route('/',) #ruta raiz
 def index():
     return render_template('index.html')
-
+'''
 
     
 @app.route('/salones',methods=['POST']) #ruta raiz
@@ -115,12 +115,11 @@ def update_salon_path(id):
 
 
 
-
+'''
 db.init_app(app)
 with app.app_context():
     db.create_all()
-    #print("BD conectada!") 
+    print("BD conectada!") 
 
 if __name__ == "__main__":
     app.run(debug=True)
-'''
