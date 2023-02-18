@@ -4,7 +4,7 @@ import json
 from flask import render_template,redirect,url_for
 from flask import request,jsonify
 from app.db import db
-from app.models.salon import Salon
+from app.models.company import Company
 #from flask_restful import Api, Resource
 
 app=create_app()
@@ -17,32 +17,33 @@ ma = Marshmallow(app) #Es una extensión que facilita la
 class CompanySchema(ma.Schema):
     class Meta:
         fields = ('ruc', 'name', 'sunatstate')
-        model =Salon
+        model =Company
 
-salon_schema = SalonSchema() 
-salon_schema = SalonSchema(many=True)
+company_schema = CompanySchema() 
+company_schema = CompanySchema(many=True)
 
 @app.route('/',) #ruta raiz
 def index():
     return render_template('index.html')
-'''
+
 
     
-@app.route('/salones',methods=['POST']) #ruta raiz
-def add_salones():
-    aula=request.json['aula']
-    hora_entrada=request.json['hora_entrada']
+@app.route('/company',methods=['POST']) #ruta raiz
+def add_company():
+    ruc=request.json['ruc']
+    name=request.json['name']
+    sunatestate=request.json['sunatestate']
 
-    nuevo_salon= Salon(aula, hora_entrada)
+    new_company= Company(ruc, name,sunatestate)
 
-    db.session.add(nuevo_salon)
+    db.session.add(new_company)
     db.session.commit()
 
 
-    return jsonify({'message':'salon agregado'})
-
+    return jsonify({'message':'Company aded'})
+#request.json #
 #api.add_resource(add_salones, '/salones')
-
+'''
 
 """ class Test(Resource):
     @classmethod
